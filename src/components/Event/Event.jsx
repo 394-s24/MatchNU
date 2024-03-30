@@ -1,16 +1,22 @@
 import { useState, useEffect } from "react";
 import getUserById from "./getUserById";
-import "./Event.css";
+import getTagsByIds from "./getTagsByIds";
+import ProfilePicture from "../../components/ProfilePicture";
+
+// import "./Event.css";
 import Popup from "../Popup";
 
 const Event = (
 	props,
 ) => {
 	const [poster, setPoster] = useState(null);
+	const [tags, setTags] = useState([]);
 	const [showPopup, setShowPopup] = useState(false);
 
 	useEffect(() => {
 		getUserById(props.user_id).then((user) => setPoster(user));
+
+		getTagsByIds(props.tags).then((tags) => setTags(tags));
 	}, []);
 
 	const togglePopup = () => {
@@ -20,16 +26,6 @@ const Event = (
 	console.log(poster);
 
 	return (
-		// <div className="event">
-		// 	<div className="title-button">
-		// 		<div className="event-title"> {props.title} </div>
-		// 		<button className="normal_button" onClick={togglePopup}> Learn More </button>
-		// 	</div>
-		// 	<img src={"https://dailynorthwestern.com/wp-content/uploads/2020/02/LIBRARY-OwenStidman-WEB.jpg"} alt={props.title} className="event-thumbnail"/>
-			
-		// 	{showPopup && <Popup {...props} onClose={togglePopup}
-        // 	/>}
-		// </div>
 		<div className="card mb-3" style={{margin: "20px"}}>
 			<div className="row g-0">
 				<div className="col-md-4">
@@ -38,22 +34,24 @@ const Event = (
 				<div className="col-md-8">
 					<div className="card-body">
 						<div className="card-title"> {props.title} </div>
-						<div className="card-body">
 							<div className="card-text">
-								{poster && poster.username }
+								{poster && (
+									<div>
+										<ProfilePicture imageURL={"https://courses.cs.northwestern.edu/394/guides/images/me-sept-2014-small.png"} />
+									<p>Posted by: {poster.username}</p>
+									</div>
+								)}
 							</div>
-							<button className="btn btn-primary" onClick={togglePopup}> Learn More </button>
+							<button className="btn btn-primary" onClick={togglePopup} style={{marginBottom:"15px"}}> Learn More </button>
 							<div>
-								{props.tags.map((tag, index) => (
-									<span key={index} className="badge badge-pill badge-secondary"{... tag}></span>
+								{tags.map((tag, index) => (
+									<span key={index} className="badge rounded-pill bg-info" style={{margin: "2px", fontSize: "14px"}}>{tag}</span>
 								))}
 							</div>
-						</div> 
 						
 
 					</div>
-					{showPopup && <Popup {...props} onClose={togglePopup}
-						/>}
+					{showPopup && <Popup {...props} onClose={togglePopup} />}
 				</div>
 			</div>
 			

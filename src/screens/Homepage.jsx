@@ -10,15 +10,13 @@ const Homepage = () => {
       if (!snapshot.exists()) return;
 
       const eventsVal = snapshot.val();
-
-      // const eventIds = Object.keys(eventsVal);
       
       const eventsArray = Object.keys(eventsVal).map((id) => ({
         id,
         ...eventsVal[id]
       }));
-      console.log(eventsArray.map(e => e.created_at));
-      eventsArray.sort((a,b) => new Date(a.created_at) - new Date(b.created_at));
+
+      eventsArray.sort((a,b) => new Date(a.event_time) - new Date(b.event_time));
 
       setEvents(eventsArray);
     });
@@ -30,7 +28,7 @@ const Homepage = () => {
     <div className="homepage">
       <nav className="navbar bg-body-tertiary sticky-top">
       <div className="container-fluid">
-        <a className="navbar-brand">NUMatch</a>
+        <a className="navbar-brand">MatchNU</a>
         <form className="d-flex" role="search">
           <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
           <button className="btn btn-outline-success" type="submit">Search</button>

@@ -1,31 +1,37 @@
 import { useState } from "react";
 import "./Event.css";
+import Popup from "./Popup";
+import { set } from "firebase/database";
 
-const Event = ({
-	user,
-	title,
-	description,
-	attendees,
-	tags,
-	thumbnail_url,
-	created_at,
-	event_time,
-}) => {
+const Event = (
+	// user,
+	// title,
+	// description,
+	// attendees,
+	// tags,
+	// thumbnail_url,
+	// created_at,
+	// event_time,
+	props,
+) => {
 	const [showPopup, setShowPopup] = useState(false);
 
-	const eventLearnMore = () => {
-		setShowPopup(true);
-	};
+
+	const togglePopup = () => {
+		setShowPopup(!showPopup);
+	}
+
 
 	return (
 		<div className="event">
 			<div className="title-button">
-				<div className="event-title"> {title} </div>
-				<button className="normal_button" onClick={eventLearnMore}> Learn More </button>
+				<div className="event-title"> {props.title} </div>
+				<button className="normal_button" onClick={togglePopup}> Learn More </button>
 			</div>
-			<img src={"https://dailynorthwestern.com/wp-content/uploads/2020/02/LIBRARY-OwenStidman-WEB.jpg"} alt={title} className="event-thumbnail"/>
+			<img src={"https://dailynorthwestern.com/wp-content/uploads/2020/02/LIBRARY-OwenStidman-WEB.jpg"} alt={props.title} className="event-thumbnail"/>
 			
-			{showPopup && <div className="popup"></div>}
+			{showPopup && <Popup {...props} onClose={togglePopup}
+        	/>}
 		</div>
 	);
 };

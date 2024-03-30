@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getData } from "../firebase/utils";
 
 const Popup = ({
     title,
@@ -7,6 +8,19 @@ const Popup = ({
     event_time,
     onClose 
     }) => {
+
+        const [tagsString, setTags] = useState([]);
+
+        useEffect(() => {
+            const getTags = async () => {
+                const tagsSnapshot = await getData('tags');
+                if (!tagsSnapshot.exists()) return;
+                const tagsVal = tagsSnapshot.val();
+                setTags(Object.keys(tagsVal).map((tag) => tagsVal[tag]));
+            };
+            getTags();
+        } , []);
+
     return (
         <div style={{
           position: 'fixed',
@@ -21,7 +35,7 @@ const Popup = ({
         }}>
             <h2>{title}</h2>
             <p>{description}</p>
-            <p>{tags.join(', ')}</p>
+            <p>{tagsString.join(', ')}</p>
             <p>{event_time}</p>
             <button onClick={onClose} style={{ marginTop: '10px' }}>Close</button>
         </div>

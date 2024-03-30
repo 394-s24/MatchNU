@@ -1,4 +1,4 @@
-import getData from "../firebase/utils";
+import { getData } from "../firebase/utils";
 
 const getEvents = async() => {
   const events = await getData('events');

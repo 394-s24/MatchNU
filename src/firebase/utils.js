@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, get, ref } from "firebase/database";
+import { getDatabase, get, set, ref } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC06R40JMEz9Wn2e-kw-5ipZIKQQwThGVY",
@@ -19,4 +19,8 @@ const getData = async (pathname) => {
     return await get(ref(db, pathname));
 };
 
-export default getData;
+const setData = async (pathname, data) => {
+    return await set(ref(db, pathname), data);
+}
+
+export { getData, setData };

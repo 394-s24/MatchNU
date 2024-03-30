@@ -1,0 +1,32 @@
+.event {
+    display: flex;
+    align-items: flex-start;
+    width: 260px;
+    height: 100px;
+    max-width: 80%;
+    background-color: aqua;
+    margin: 0 auto;
+    margin: 20px auto;
+}
+
+.title-button {
+    
+}
+
+.event-title {
+    margin-bottom: 10px;
+}
+
+.normal_button {
+    background-color: purple;
+    color: white;
+    border-radius: 5px;
+    font-size: 5px;
+    cursor: pointer;
+    width: 50%;
+    height:30%;
+}
+
+.event-thumbnail {
+    max-height: 80%;
+}

@@ -33,15 +33,15 @@ const Event = (
 		// 	{showPopup && <Popup {...props} onClose={togglePopup}
         // 	/>}
 		// </div>
-		<div class="card mb-3" style={"margin: 20px"}>
-			<div class="row g-0">
-				<div class="col-md-4">
+		<div className="card mb-3" style={{margin: "20px"}}>
+			<div className="row g-0">
+				<div className="col-md-4">
 					
 					<img src={"https://dailynorthwestern.com/wp-content/uploads/2020/02/LIBRARY-OwenStidman-WEB.jpg"} alt={props.title} className="img-fluid rounded-start"/>
 					
 					
 				</div>
-				<div class="col-md-8">
+				<div className="col-md-8">
 					<div className="card-body">
 						<div className="card-title"> {props.title} </div>
 						<button className="btn btn-primary" onClick={togglePopup}> Learn More </button>

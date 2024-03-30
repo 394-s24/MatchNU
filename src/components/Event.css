@@ -4,8 +4,9 @@
     width: 260px;
     height: 100px;
     max-width: 80%;
-    background-color: aqua;
-    margin: 0 auto;
+    background-color: gainsboro;
+    margin: 20px auto;
+    border-radius: 5px;
 }
 
 .title-button {
@@ -35,4 +36,6 @@
 .event-thumbnail {
     margin: auto 0;
     max-height: 80%;
+    float:right;
+    align-self: flex-end;
 }

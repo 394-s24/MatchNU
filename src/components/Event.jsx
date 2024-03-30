@@ -49,8 +49,6 @@ const Event = (
 					{showPopup && <Popup {...props} onClose={togglePopup}
 						/>}
 				</div>
-				
-				
 			</div>
 			
 		</div>

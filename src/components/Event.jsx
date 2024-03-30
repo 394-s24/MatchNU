@@ -26,6 +26,7 @@ const Event = (
 		<div className="event">
 			<div className="title-button">
 				<div className="event-title"> {props.title} </div>
+				<div className="host-pfp"> pfp here (?) </div>
 				<button className="normal_button" onClick={togglePopup}> Learn More </button>
 			</div>
 			<img src={"https://dailynorthwestern.com/wp-content/uploads/2020/02/LIBRARY-OwenStidman-WEB.jpg"} alt={props.title} className="event-thumbnail"/>

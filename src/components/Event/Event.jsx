@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import getUserById from "./getUserById";
 import getTagsByIds from "./getTagsByIds";
 import ProfilePicture from "../../components/ProfilePicture";
+import rsvpForEvent from "./rsvpForEvent";
+import getRsvpStatus from "./getRsvpStatus";
 
 // import "./Event.css";
-import Popup from "../Popup";
+import Popup from "../Popup/Popup";
 import Tag from "../Tag";
+import { get } from "firebase/database";
 
 const Event = (
 	props,
@@ -13,21 +16,31 @@ const Event = (
 	const [poster, setPoster] = useState(null);
 	const [tags, setTags] = useState([]);
 	const [showPopup, setShowPopup] = useState(false);
+	
+
+	const demoUserId = '-NuLSjbKrYwcvBYz0Jhx';
+
+	const [rsvpStatus, setRsvpStatus] = useState(false);
 
 	useEffect(() => {
 		getUserById(props.user_id).then((user) => setPoster(user));
-
 		getTagsByIds(props.tags).then((tags) => setTags(tags));
+		getRsvpStatus(demoUserId, props.id).then((status) => setRsvpStatus(status));
 	}, []);
 
 	const togglePopup = () => {
 		setShowPopup(!showPopup);
 	}
 
-	const rsvpForEvent = () => {
-		console.log('RSVP!')
+	const toggleRsvp = () => {
+		console.log(rsvpStatus)
+		if (rsvpStatus) {
+			rsvpForEvent(demoUserId, props.id, false);
+		} else {
+			rsvpForEvent(demoUserId, props.id, true);
+		}
+		setRsvpStatus(!rsvpStatus);
 	}
-
 	// console.log(poster);
 
 	return (
@@ -58,7 +71,15 @@ const Event = (
 								alignItems: 'center', 
 								gap: '10px'}}>
 							<button className="btn btn-primary mb-3" onClick={togglePopup}> Learn More </button>
-							<button className="btn btn-primary mb-3" onClick={rsvpForEvent}> RSVP </button>
+							<button className="btn btn-primary mb-3" onClick={toggleRsvp} style={{
+							backgroundColor: rsvpStatus ? 'red' : 'green',
+							color: rsvpStatus ? 'white' : ''}}> 
+							{
+								rsvpStatus
+									? 'Un-RSVP'
+									: 'RSVP'
+							
+							} </button>
 							</div>
 							<div>
 								{tags.map((tag, index) => (

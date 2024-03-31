@@ -1,31 +1,51 @@
 import { useState, useEffect } from "react";
-import { getData } from "../firebase/utils";
-import getTagsByIds from "./Event/getTagsByIds";
-import getUserById from "./Event/getUserById";
-import ProfilePicture from "./ProfilePicture";
-import Tag from "./Tag"
+import { getData } from "../../firebase/utils";
+import getTagsByIds from "../Event/getTagsByIds";
+import getUserById from "../Event/getUserById";
+import ProfilePicture from "../ProfilePicture";
+import Tag from "../Tag"
+import getAttendeesByEventId from "./getAttendeesByEventId";
 
 const Popup = ({
+    id,
     title,
     description,
     tags,
     event_time,
-    attendees_ids,
     onClose,
 }) => {
 
     const [tagsString, setTags] = useState([]);
     const [attendees, setAttendees] = useState([]);
-    useEffect(() => {
-        getTagsByIds(tags).then((tags) => setTags(tags));
-        if (attendees_ids.length === 0) return;
-        Promise.all(attendees_ids.map(async (attendeeId) => {
-            const user = await getUserById(attendeeId);
-            return user;
-        })).then((attendees) => setAttendees(attendees));
-    }, []);
+    const [attendees_ids, setAttendeesIds] = useState([]);
 
-    console.log(attendees)
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const fetchedTags = await getTagsByIds(tags);
+                setTags(fetchedTags);
+
+                const fetchedAttendeesIds = await getAttendeesByEventId(id);
+                setAttendeesIds(fetchedAttendeesIds);
+
+                // If there are no attendees, avoid making unnecessary calls
+                if (fetchedAttendeesIds.length === 0) {
+                    setAttendees([]);
+                    return;
+                }
+
+                const fetchedAttendees = await Promise.all(
+                    fetchedAttendeesIds.map(id => getUserById(id))
+                );
+                setAttendees(fetchedAttendees);
+            } catch (error) {
+                console.error("Failed to fetch data:", error);
+                // Handle errors as appropriate for your application
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <div style={{

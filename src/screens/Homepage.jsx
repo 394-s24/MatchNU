@@ -24,18 +24,31 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-    <h1> Upcoming Events </h1>
-    <div>
-      {
-        events.map((event) => <Event key={event.id} {...event}/>)
-      }
-      <Event
-        user={{ id: 1, username: "Bob" }}
-        title={"Study at Main"}
-        description={"Let's study at main wow"}
-      />
-    </div> 
+    <nav className="navbar bg-body-tertiary sticky-top">
+    <div className="container-fluid">
+      <a className="navbar-brand">NUMatch</a>
+      <form className="d-flex" role="search">
+        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button className="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <li className="nav-item dropdown">
+        <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Filter</a>
+        <ul className="dropdown-menu">
+          <li><a className="dropdown-item" href="#">Sports</a></li>
+
+        </ul>
+      </li>
+
     </div>
+  </nav>
+  <h1> Upcoming Events </h1>
+  <div>
+    {
+      events.map((event) => <Event key={event.id} {...event}/>)
+    }
+  </div> 
+</div>
 
   );
 };

@@ -1,23 +1,27 @@
 import { useState, useEffect } from "react";
 import { getData } from "../firebase/utils";
+import getTagsByIds from "./Event/getTagsByIds";
+import getUserById from "./Event/getUserById";
 
 const Popup = ({
     title,
     description,
     tags,
     event_time,
-    onClose
+    attendees_ids,
+    onClose,
 }) => {
 
     const [tagsString, setTags] = useState([]);
+    const [attendees, setAttendees] = useState([]);
     useEffect(() => {
-        const getTags = async () => {
-            const tagsSnapshot = await getData('tags');
-            if (!tagsSnapshot.exists()) return;
-            const tagsVal = tagsSnapshot.val();
-            setTags(Object.keys(tagsVal).map((tag) => tagsVal[tag]));
-        };
-        getTags();
+        getTagsByIds(tags).then((tags) => setTags(tags));
+        console.log(attendees_ids)
+        if (attendees_ids.length === 0) return;
+        Promise.all(attendees_ids.map(async (attendeeId) => {
+            const user = await getUserById(attendeeId);
+            return user;
+        })).then((attendees) => setAttendees(attendees));
     }, []);
 
     return (
@@ -36,6 +40,12 @@ const Popup = ({
             <p>{description}</p>
             <p>{tagsString.join(', ')}</p>
             <p>{(new Date(event_time)).toLocaleString()}</p>
+            <h3>Attendees:</h3>
+            <ul>
+                {attendees.map((attendee, index) => (
+                    <li key={index}>{attendee.username}</li>
+                ))}
+            </ul>
             <button className="btn btn-primary" onClick={onClose} style={{ marginTop: '10px' }}>Close</button>
         </div>
     );

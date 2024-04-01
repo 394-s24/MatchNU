@@ -28,6 +28,8 @@ const Homepage = () => {
       const titleMatch = event.title.toLowerCase().includes(query);
             
       const eventAtMatch = (new Date(event.event_time)).toLocaleString().toLowerCase().includes(query);
+      
+      const descriptionMatch = event.description.toLowerCase().includes(query);
 
       return titleMatch || descriptionMatch || eventAtMatch;
     });

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import Event from "../components/Event";
+import Event from "../components/Event/Event";
 import getEvents from "./getEvents";
+import { Dropdown } from 'react-bootstrap';
 
 const Homepage = () => {
   const [events, setEvents] = useState([]);
@@ -10,13 +11,15 @@ const Homepage = () => {
       if (!snapshot.exists()) return;
 
       const eventsVal = snapshot.val();
-
-      const eventIds = Object.keys(eventsVal);
       
-      setEvents(eventIds.map((id) => ({
+      const eventsArray = Object.keys(eventsVal).map((id) => ({
         id,
         ...eventsVal[id]
-      })));
+      }));
+
+      eventsArray.sort((a,b) => new Date(a.event_time) - new Date(b.event_time));
+
+      setEvents(eventsArray);
     });
   }, []);
 
@@ -24,31 +27,33 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-    <nav className="navbar bg-body-tertiary sticky-top">
-    <div className="container-fluid">
-      <a className="navbar-brand">NUMatch</a>
-      <form className="d-flex" role="search">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-success" type="submit">Search</button>
-      </form>
-      <li className="nav-item dropdown">
-        <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Filter</a>
-        <ul className="dropdown-menu">
-          <li><a className="dropdown-item" href="#">Sports</a></li>
+      <nav className="navbar bg-body-tertiary sticky-top">
+      <div className="container-fluid">
+        <a className="navbar-brand">MatchNU</a>
+        <form className="d-flex" role="search">
+          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+          <button className="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Filter
+        </Dropdown.Toggle>
 
-        </ul>
-      </li>
+        <Dropdown.Menu>
+          <Dropdown.Item href="#">Sports</Dropdown.Item>
+         
+        </Dropdown.Menu>
+      </Dropdown>
 
-    </div>
-  </nav>
-  <h1> Upcoming Events </h1>
-  <div>
-    {
-      events.map((event) => <Event key={event.id} {...event}/>)
-    }
-  </div> 
-</div>
+      </div>
+    </nav>
+    <h1> Upcoming Events </h1>
+    <div>
+      {
+        events.map((event) => <Event key={event.id} {...event}/>)
+      }
+    </div> 
+  </div>
 
   );
 };

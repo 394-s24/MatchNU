@@ -50,7 +50,7 @@ const Homepage = () => {
       <nav className="navbar bg-body-tertiary sticky-top">
       <div className="container-fluid">
         <a className="navbar-brand">MatchNU</a>
-        <form className="d-flex" role="search" >
+        <form className="d-flex" role="search" style={{width: 180}}>
           <input 
           className="form-control me-2" 
           type="search" placeholder="Search" 
@@ -61,11 +61,7 @@ const Homepage = () => {
         </form>
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic">
-            {
-              selectedTag
-                ? selectedTag.name
-                : 'Filter'
-            }
+            Filter
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
@@ -79,7 +75,7 @@ const Homepage = () => {
 
       </div>
     </nav>
-    <h1> Upcoming Events </h1>
+    <h1 style={{padding: 10}}> Upcoming {!!selectedTag && selectedTag.name} Events </h1>
     <div>
       {
         filteredEvents.length === 0 ? ("No events found!") : filteredEvents.map((event) => <Event key={event.id} {...event}/>)

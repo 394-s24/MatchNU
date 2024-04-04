@@ -61,7 +61,7 @@ const Homepage = () => {
           onChange={searchSubmit}/>
         </form>
         <button className="btn btn-primary mb-3" onClick={() => setShowCreateEventPopup(true)}>+</button>
-        {/* WIP: make it actually create an event lol */}
+        {/* WIP: make it actually create an event loll */}
         {showCreateEventPopup && <CreateEventPopup onClose={() => setShowCreateEventPopup(false)} />}
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic">

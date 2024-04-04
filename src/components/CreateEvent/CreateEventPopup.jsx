@@ -1,5 +1,3 @@
-// CreateEventPopup.jsx
-
 import React, { useState } from 'react';
 
 const CreateEventPopup = ({ onClose, onCreate }) => {

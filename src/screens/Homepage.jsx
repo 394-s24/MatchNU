@@ -40,8 +40,6 @@ const Homepage = () => {
     setSearchQuery(query);
   }
 
-
-
   // console.log(events);
   // console.log(tags);
 
@@ -76,7 +74,7 @@ const Homepage = () => {
       </div>
     </nav>
     <h1 style={{padding: 10}}> Upcoming {!!selectedTag && selectedTag.name} Events </h1>
-    <div>
+    <div style={{paddingBottom: 50}}>
       {
         filteredEvents.length === 0 ? ("No events found!") : filteredEvents.map((event) => <Event key={event.id} {...event}/>)
       }

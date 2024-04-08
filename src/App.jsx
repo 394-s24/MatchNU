@@ -1,11 +1,14 @@
 import "./App.css";
-import Homepage from "./screens/Homepage";
+import { UserContextProvider } from "./contexts/UserContext";
+import Navigation from "./Navigation";
 
 const App = () => {
   return (
-    <div className="App">
-      <Homepage />
-    </div>
+    <UserContextProvider>
+      <div className="App">
+        <Navigation />
+      </div>
+    </UserContextProvider>
   );
 };
 

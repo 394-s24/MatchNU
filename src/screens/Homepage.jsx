@@ -29,6 +29,8 @@ const Homepage = () => {
       const titleMatch = event.title.toLowerCase().includes(query);
             
       const eventAtMatch = (new Date(event.event_time)).toLocaleString().toLowerCase().includes(query);
+      
+      const descriptionMatch = event.description.toLowerCase().includes(query);
 
       return titleMatch || descriptionMatch || eventAtMatch;
     });
@@ -39,8 +41,6 @@ const Homepage = () => {
     setSearchQuery(query);
   }
 
-
-
   // console.log(events);
   // console.log(tags);
 
@@ -49,7 +49,7 @@ const Homepage = () => {
       <nav className="navbar bg-body-tertiary sticky-top">
       <div className="container-fluid">
         <a className="navbar-brand">MatchNU</a>
-        <form className="d-flex" role="search" >
+        <form className="d-flex" role="search" style={{width: 180}}>
           <input 
           className="form-control" 
           type="search" placeholder="Search" 
@@ -60,11 +60,7 @@ const Homepage = () => {
         </form>
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic">
-            {
-              selectedTag
-                ? selectedTag.name
-                : 'Filter'
-            }
+            Filter
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
@@ -78,9 +74,8 @@ const Homepage = () => {
 
       </div>
     </nav>
-    <h1> 
-      {selectedTag == null ? "Upcoming Events" :selectedTag.name}</h1>
-    <div>
+    <h1 style={{padding: 10}}> Upcoming {!!selectedTag && selectedTag.name} Events </h1>
+    <div style={{paddingBottom: 50}}>
       {
         filteredEvents.length === 0 ? ("No events found!") : filteredEvents.map((event) => <Event key={event.id} {...event}/>)
       }

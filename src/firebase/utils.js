@@ -11,7 +11,7 @@ const firebaseConfig = {
   appId: "1:383025274563:web:e066b3201fc62265570c76"
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 const db = getDatabase();
 
@@ -23,4 +23,4 @@ const setData = async (pathname, data) => {
     return await set(ref(db, pathname), data);
 }
 
-export { getData, setData };
+export { app, getData, setData };

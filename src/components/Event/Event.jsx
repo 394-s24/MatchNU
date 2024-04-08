@@ -47,7 +47,7 @@ const Event = (
 		<div className="card m-4">
 			<div className="row g-0">
 				<div className="col-md-4">
-					<img src={"https://dailynorthwestern.com/wp-content/uploads/2020/02/LIBRARY-OwenStidman-WEB.jpg"} alt={props.title} className="img-fluid rounded-start"/>
+					<img src={props.thumbnail_url} alt={props.title} className="img-fluid rounded-start"/>
 				</div>
 				<div className="col-md-8">
 					<div className="card-body">
@@ -63,6 +63,7 @@ const Event = (
 									<p>Posted by: {poster.username}</p>
 									<p>Date: {(new Date(props.event_time)).toLocaleDateString()}</p>
   									<p>Time: {(new Date(props.event_time)).toLocaleTimeString()}</p>
+									<p>Location: {props.location}</p>
 									</div>
 								)}
 							</div>

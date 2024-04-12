@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import getUserById from "./getUserById";
 import getTagsByIds from "./getTagsByIds";
 import ProfilePicture from "../../components/ProfilePicture";
@@ -9,23 +9,25 @@ import getRsvpStatus from "./getRsvpStatus";
 import Popup from "../Popup/Popup";
 import Tag from "../Tag";
 import { get } from "firebase/database";
+import { UserContext } from "../../contexts/UserContext";
+
 
 const Event = (
 	props,
 ) => {
+
 	const [poster, setPoster] = useState(null);
 	const [tags, setTags] = useState([]);
 	const [showPopup, setShowPopup] = useState(false);
-	
 
-	const demoUserId = '-NuLSjbKrYwcvBYz0Jhx';
-
+	const { user, setUser } = useContext(UserContext);
+	console.log(user);
 	const [rsvpStatus, setRsvpStatus] = useState(false);
 
 	useEffect(() => {
 		getUserById(props.user_id).then((user) => setPoster(user));
 		getTagsByIds(props.tags).then((tags) => setTags(tags));
-		getRsvpStatus(demoUserId, props.id).then((status) => setRsvpStatus(status));
+		getRsvpStatus(user.id, props.id).then((status) => setRsvpStatus(status));
 	}, []);
 
 	const togglePopup = () => {
@@ -35,9 +37,9 @@ const Event = (
 	const toggleRsvp = () => {
 		console.log(rsvpStatus)
 		if (rsvpStatus) {
-			rsvpForEvent(demoUserId, props.id, false);
+			rsvpForEvent(user.id, props.id, false);
 		} else {
-			rsvpForEvent(demoUserId, props.id, true);
+			rsvpForEvent(user.id, props.id, true);
 		}
 		setRsvpStatus(!rsvpStatus);
 	}
@@ -77,7 +79,7 @@ const Event = (
 							color: rsvpStatus ? 'white' : ''}}> 
 							{
 								rsvpStatus
-									? 'Un-RSVP'
+									? "Can't go :("
 									: 'RSVP'
 							
 							} </button>

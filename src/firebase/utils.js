@@ -23,4 +23,4 @@ const setData = async (pathname, data) => {
     return await set(ref(db, pathname), data);
 }
 
-export { app, getData, setData };
+export { app, db, getData, setData };

@@ -1,9 +1,10 @@
 import React from "react";
 import LoginButton from "./LoginButton";
+import './Login.css'
 
-const Login = (api_url) => {
+const Login = () => {
   return (
-    <div>
+    <div className="loginButton">
       <LoginButton />
     </div>
   )

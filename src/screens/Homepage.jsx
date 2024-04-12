@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Event from "../components/Event/Event";
+import CreateEventPopup from "../components/CreateEvent/CreateEventPopup";
 import getEvents from "./getEvents";
 
 import getTags from "./getTags";
@@ -10,6 +11,7 @@ const Homepage = () => {
   const [tags, setTags] = useState([]);
   const [selectedTag, setSelectedTag] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showCreateEventPopup, setShowCreateEventPopup] = useState(false);
   // const [filteredEvents, setFilteredEvents] = useState([]);
 
   useEffect(() => {
@@ -56,8 +58,10 @@ const Homepage = () => {
           aria-label="Search"
           value={searchQuery}
           onChange={searchSubmit}/>
-          
         </form>
+        <button className="btn btn-primary mb-3" onClick={() => setShowCreateEventPopup(true)}>+</button>
+        {/* WIP: make it actually create an event loll */}
+        {showCreateEventPopup && <CreateEventPopup onClose={() => setShowCreateEventPopup(false)} />}
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic">
             Filter

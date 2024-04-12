@@ -9,10 +9,10 @@ import { Dropdown } from 'react-bootstrap';
 const Homepage = () => {
   const [events, setEvents] = useState([]);
   const [tags, setTags] = useState([]);
-  const [selectedTag, setSelectedTag] = useState(null);
+  const [selectedTags, setSelectedTags] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [tagSearchQuery, setTagSearchQuery] = useState('');
   const [showCreateEventPopup, setShowCreateEventPopup] = useState(false);
-  // const [filteredEvents, setFilteredEvents] = useState([]);
 
   useEffect(() => {
     getEvents().then(events => setEvents(events));
@@ -21,7 +21,7 @@ const Homepage = () => {
   }, []);
 
 
-  let filteredEvents = !!selectedTag ? events.filter(event=> event.tags.includes(selectedTag.id)) : events;
+  let filteredEvents = !!selectedTags.length ? events.filter(event => selectedTags.every(tag => event.tags.includes(tag.id))) : events;
   
   if (searchQuery) {
     
@@ -36,15 +36,19 @@ const Homepage = () => {
 
       return titleMatch || descriptionMatch || eventAtMatch;
     });
+
   }
+
+  const filteredTags = tags.filter(tag => 
+    tag.name.toLowerCase().includes(tagSearchQuery.toLowerCase())
+  );
+  
 
   const searchSubmit = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
   }
 
-  // console.log(events);
-  // console.log(tags);
 
   return (
     <div className="homepage">
@@ -68,17 +72,34 @@ const Homepage = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item onClick={() => setSelectedTag(null)}>All</Dropdown.Item>
-            {tags.map((tag, index)=> (
-              <Dropdown.Item key={tag.id} onClick={()=> setSelectedTag(tag)}>{tag.name}</Dropdown.Item>
-            ))}
+            <Dropdown.ItemText>
+              <input
+                type="text"
+                placeholder="Search tags..."
+                value={tagSearchQuery}
+                onChange={(e) => setTagSearchQuery(e.target.value)}
+                style={{ width: '100%', padding: '5px 10px', margin: '5px 0' }}
+              />
+            </Dropdown.ItemText>
+            <Dropdown.Item onClick={() => setSelectedTags([])}>All</Dropdown.Item>
+            {filteredTags.map((tag, index) => (
+              <Dropdown.Item key={tag.id} onClick={() => setSelectedTags(
+                selectedTags.includes(tag) ? selectedTags.filter(t => t !== tag) : [...selectedTags, tag]
+              )}
+              style={{
+                backgroundColor: selectedTags.includes(tag) ? '#007bff' : 'transparent', // Example color change
+                color: selectedTags.includes(tag) ? 'white' : 'inherit'
+              }}>
+                {tag.name}
+              </Dropdown.Item>
+        ))}
             
           </Dropdown.Menu>
         </Dropdown>
 
       </div>
     </nav>
-    <h1 style={{padding: 10}}> Upcoming {!!selectedTag && selectedTag.name} Events </h1>
+    {/* <h1 style={{padding: 10}}> Upcoming {!!selectedTag && selectedTag.name} Events </h1> */}
     <div style={{paddingBottom: 50}}>
       {
         filteredEvents.length === 0 ? ("No events found!") : filteredEvents.map((event) => <Event key={event.id} {...event}/>)

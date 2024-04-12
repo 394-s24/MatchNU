@@ -21,7 +21,7 @@ const Event = (
 	const [showPopup, setShowPopup] = useState(false);
 
 	const { user, setUser } = useContext(UserContext);
-	console.log(user);
+
 	const [rsvpStatus, setRsvpStatus] = useState(false);
 
 	useEffect(() => {

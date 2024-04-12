@@ -5,6 +5,7 @@ import { getData, setData } from "./firebase/utils";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Homepage from "./screens/Homepage";
 import Login from "./screens/Login/Login";
+import CreateEvent from "./screens/CreateEvent/CreateEvent";
 import BottomNavbar from "./components/BottomNavbar/BottomNavbar";
 
 const Navigation = () => {
@@ -48,6 +49,7 @@ const Navigation = () => {
         <div>
           <Routes>
             <Route path="/" element={<Homepage />} />
+            <Route path="/create-event" element={<CreateEvent />} />
           </Routes>
           <BottomNavbar />
         </div>

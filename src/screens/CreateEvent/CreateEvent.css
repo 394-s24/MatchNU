@@ -1,0 +1,9 @@
+#create-event-container {
+  padding: 20px;
+}
+
+#create-event-container > form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

@@ -7,6 +7,7 @@ const BottomNavbar = () => {
       {/* home */}
       <button><i className="bi bi-house h2"></i></button> 
       {/* create event */}
+      <button><i className="bi bi-plus-circle h2"></i></button>
       {/* <button><i className="bi bi-calendar-event h2"></i></button> */}
       {/* profile */} 
       {/* <button><i className="bi bi-person-square h2"></i></button> */}

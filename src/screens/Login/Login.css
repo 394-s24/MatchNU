@@ -4,3 +4,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4E2A84;
+    font-size: 36px;
+  }

@@ -1,5 +1,5 @@
 import React from "react";
-import { signInWithRedirect, getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase/utils";
 
 const LoginButton = () => {
@@ -8,7 +8,7 @@ const LoginButton = () => {
 
   return (
     <div>
-      <button className="login" onClick={() => signInWithRedirect(auth, googleProvider)}>
+      <button className="login" onClick={() => signInWithPopup(auth, googleProvider)}>
         Login with Google!
       </button>
     </div>

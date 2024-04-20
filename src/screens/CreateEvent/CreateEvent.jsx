@@ -1,11 +1,21 @@
+
+import { useEffect, useState } from "react";
+
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from 'react-router-dom';
 import "./CreateEvent.css";
+import getTags from "../getTags";
 // import createEvent from "./createEvent";
 
 const CreateEvent = () => {
   const navigate = useNavigate();
+
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    getTags().then((tags) => setTags(tags));
+  }, []);
 
   return (
     <div id="create-event-container">

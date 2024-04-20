@@ -1,24 +1,28 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useNavigate } from 'react-router-dom';
 import "./CreateEvent.css";
-import createEvent from "./createEvent";
+// import createEvent from "./createEvent";
 
 const CreateEvent = () => {
+  const navigate = useNavigate();
+
   return (
     <div id="create-event-container">
       <h1>Create an event</h1>
       <Form
         onSubmit={async (e) => {
           e.preventDefault();
-          await createEvent({
-            title: e.target.title.value,
-            description: e.target.description?.value,
-            date: e.target.date.value,
-            time: e.target.time.value,
-            location: e.target.location.value,
-            tags: e.target.tags?.value,
-            thumbnail: e.target.thumbnail?.files[0],
-          });
+          // await createEvent({
+          //   title: e.target.title.value,
+          //   description: e.target.description?.value,
+          //   date: e.target.date.value,
+          //   time: e.target.time.value,
+          //   location: e.target.location.value,
+          //   tags: e.target.tags?.value,
+          //   thumbnail: e.target.thumbnail?.files[0],
+          // });
+          navigate('/');
         }}
       >
         <Form.Group>

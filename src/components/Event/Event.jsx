@@ -86,7 +86,7 @@ const Event = (
 							</div>
 							<div>
 								{tags.map((tag, index) => (
-									<Tag key={index}>{tag}</Tag>
+									<Tag key={index}>{tag['tag']}</Tag>
 								))}
 							</div>
 						

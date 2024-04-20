@@ -9,7 +9,8 @@ const getTags = async() => {
 
   return Object.keys(tagsVal).map((tagId) => ({
     id: tagId,
-    name: tagsVal[tagId]
+    name: tagsVal[tagId]['tag'],
+    type: tagsVal[tagId]['type']
   }));
 };
 

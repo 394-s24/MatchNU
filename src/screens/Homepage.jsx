@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Event from "../components/Event/Event";
-import CreateEventPopup from "../components/CreateEvent/CreateEventPopup";
 import getEvents from "./getEvents";
 
 import getTags from "./getTags";
@@ -12,7 +11,6 @@ const Homepage = () => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [tagSearchQuery, setTagSearchQuery] = useState('');
-  const [showCreateEventPopup, setShowCreateEventPopup] = useState(false);
 
   useEffect(() => {
     getEvents().then(events => setEvents(events));
@@ -39,9 +37,9 @@ const Homepage = () => {
 
   }
 
-  const filteredTags = tags.filter(tag => 
+  const filteredTags = tagSearchQuery ? tags.filter(tag => 
     tag.name.toLowerCase().includes(tagSearchQuery.toLowerCase())
-  );
+  ) : tags.filter(tag => tag.type === 0);
   
 
   const searchSubmit = (e) => {
@@ -55,7 +53,7 @@ const Homepage = () => {
       <nav className="navbar bg-body-tertiary sticky-top">
       <div className="container-fluid">
         <a className="navbar-brand">MatchNU</a>
-        <form className="d-flex" role="search" style={{width: 180}}>
+        <form className="d-flex" role="search" style={{width: 160}}>
           <input 
           className="form-control" 
           type="search" placeholder="Search" 
@@ -63,9 +61,6 @@ const Homepage = () => {
           value={searchQuery}
           onChange={searchSubmit}/>
         </form>
-        <button className="btn btn-primary mb-3" onClick={() => setShowCreateEventPopup(true)}>+</button>
-        {/* WIP: make it actually create an event loll */}
-        {showCreateEventPopup && <CreateEventPopup onClose={() => setShowCreateEventPopup(false)} />}
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic">
             Filter
@@ -99,7 +94,6 @@ const Homepage = () => {
 
       </div>
     </nav>
-    {/* <h1 style={{padding: 10}}> Upcoming {!!selectedTag && selectedTag.name} Events </h1> */}
     <div style={{paddingBottom: 50}}>
       {
         filteredEvents.length === 0 ? ("No events found!") : filteredEvents.map((event) => <Event key={event.id} {...event}/>)

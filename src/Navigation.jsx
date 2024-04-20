@@ -45,6 +45,7 @@ const Navigation = () => {
 
   return (
     <BrowserRouter>
+      
       {!!user ? (
         <div>
           <Routes>
@@ -56,6 +57,7 @@ const Navigation = () => {
       ) : (
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/create-event" element={<div>hello</div>} />
         </Routes>
       )}
     </BrowserRouter>

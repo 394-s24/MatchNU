@@ -64,7 +64,7 @@ const Popup = ({
             <p>{description}</p>
             <div>
                 {tagsString.map((tag, index) => (
-                    <Tag key={index}>{tag}</Tag>
+                    <Tag key={index}>{tag['tag']}</Tag>
                 ))}
             </div>
             <p>{(new Date(event_time)).toLocaleString()}</p>

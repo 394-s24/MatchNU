@@ -1,41 +1,41 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from "./contexts/UserContext";
 import { getAuth } from "firebase/auth";
-import { getData, setData } from "./firebase/utils";
+import { app, getData, setData } from "./firebase/utils";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Homepage from "./screens/Homepage";
 import Login from "./screens/Login/Login";
 import CreateEvent from "./screens/CreateEvent/CreateEvent";
 import BottomNavbar from "./components/BottomNavbar/BottomNavbar";
+import PrivateRoute from "./components/PrivateRoute";
 
 const Navigation = () => {
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
-    const unsubscribe = getAuth().onAuthStateChanged(async (user) => {
+    const unsubscribe = getAuth(app).onAuthStateChanged(async (user) => {
       if (user) {
         setUser({
           id: user.uid,
           email: user.email,
-          first_name: user.displayName.split(' ')[0],
-          last_name: user.displayName.split(' ').slice(1).join(' '),
+          first_name: user.displayName.split(" ")[0],
+          last_name: user.displayName.split(" ").slice(1).join(" "),
           profile_picture: user.photoURL,
           username: user.displayName,
         });
 
         const userSnapshot = await getData(`/users/${user.uid}`);
-        
+
         if (userSnapshot.exists()) return;
 
         await setData(`/users/${user.uid}`, {
           email: user.email,
-          first_name: user.displayName.split(' ')[0],
-          last_name: user.displayName.split(' ').slice(1).join(' '),
+          first_name: user.displayName.split(" ")[0],
+          last_name: user.displayName.split(" ").slice(1).join(" "),
           profile_picture: user.photoURL,
           username: user.displayName,
-        }); 
-      }
-      else {
+        });
+      } else {
         setUser(null);
       }
     });
@@ -45,21 +45,26 @@ const Navigation = () => {
 
   return (
     <BrowserRouter>
-      
-      {!!user ? (
-        <div>
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/create-event" element={<CreateEvent />} />
-          </Routes>
-          <BottomNavbar />
-        </div>
-      ) : (
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/create-event" element={<div>hello</div>} />
-        </Routes>
-      )}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Homepage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/create-event"
+          element={
+            <PrivateRoute>
+              <CreateEvent />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+      <BottomNavbar />
     </BrowserRouter>
   );
 };

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import ListGroup from "react-bootstrap/ListGroup";
 import { useNavigate } from 'react-router-dom';
 import "./CreateEvent.css";
 import getTags from "../getTags";
@@ -10,12 +11,31 @@ import getTags from "../getTags";
 
 const CreateEvent = () => {
   const navigate = useNavigate();
-
   const [tags, setTags] = useState([]);
+  const [filteredTags, setFilteredTags] = useState([]);
+  const [search, setSearch] = useState('');
+  const [selectedTags, setSelectedTags] = useState([]);
 
   useEffect(() => {
-    getTags().then((tags) => setTags(tags));
+    getTags().then((tags) => {
+      setTags(tags);
+      setFilteredTags(tags); // Initially display all tags
+    });
   }, []);
+
+  const handleSearchChange = (e) => {
+    const searchTerm = e.target.value;
+    setSearch(searchTerm);
+    setFilteredTags(tags.filter(tag => tag.name.toLowerCase().includes(searchTerm.toLowerCase())));
+  };
+
+  const handleTagSelect = (tag) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter(t => t !== tag));
+    } else {
+      setSelectedTags([...selectedTags, tag]);
+    }
+  };
 
   return (
     <div id="create-event-container">
@@ -66,7 +86,24 @@ const CreateEvent = () => {
         </Form.Group>
         <Form.Group>
           <Form.Label>Tags</Form.Label>
-          <Form.Control type="text" placeholder="Enter event tags" />
+          <Form.Control
+            type="text"
+            placeholder="Search tags"
+            value={search}
+            onChange={handleSearchChange}
+          />
+          <ListGroup>
+            {filteredTags.map(tag => (
+              <ListGroup.Item
+                key={tag.id}
+                action
+                onClick={() => handleTagSelect(tag)}
+                active={selectedTags.includes(tag)}
+              >
+                {tag.name}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
         </Form.Group>
         <Form.Group>
           <Form.Label>Thumbnail</Form.Label>

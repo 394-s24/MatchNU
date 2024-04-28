@@ -8,7 +8,7 @@ import getRsvpStatus from "./getRsvpStatus";
 // import "./Event.css";
 import Popup from "../Popup/Popup";
 import Tag from "../Tag";
-// import Comments from "../Comments/Comments";
+import Comments from "../Comments/Comments";
 import { get } from "firebase/database";
 import { UserContext } from "../../contexts/UserContext";
 
@@ -24,6 +24,7 @@ const Event = (
 	const { user, setUser } = useContext(UserContext);
 
 	const [rsvpStatus, setRsvpStatus] = useState(false);
+	const [comments, setComments] = useState(false);
 
 	useEffect(() => {
 		getUserById(props.user_id).then((user) => setPoster(user));
@@ -44,7 +45,10 @@ const Event = (
 		}
 		setRsvpStatus(!rsvpStatus);
 	}
-	// console.log(poster);
+	
+	const toggleComments = () => {
+		setComments(!comments);
+	}
 
 	return (
 		<div className="card m-4">
@@ -84,6 +88,10 @@ const Event = (
 									: 'RSVP'
 							
 							} </button>
+
+							<button className="btn btn-primary mb-3 bi bi-chat-left-text-fill" onClick={toggleComments}> 
+								
+							</button>
 							</div>
 							<div>
 								{tags.map((tag, index) => (
@@ -94,6 +102,7 @@ const Event = (
 
 					</div>
 					{showPopup && <Popup {...props} onClose={togglePopup} />}
+					{comments && <Comments eventId={props.id} onClose={toggleComments}/>}
 				</div>
 			</div>
 			

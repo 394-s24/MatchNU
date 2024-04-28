@@ -8,7 +8,7 @@ import getRsvpStatus from "./getRsvpStatus";
 // import "./Event.css";
 import Popup from "../Popup/Popup";
 import Tag from "../Tag";
-import Comments from "../Comments/Comments";
+// import Comments from "../Comments/Comments";
 import { get } from "firebase/database";
 import { UserContext } from "../../contexts/UserContext";
 

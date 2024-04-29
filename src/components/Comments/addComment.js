@@ -1,13 +1,12 @@
-import { pushData } from '../../firebase/utils'
+import { pushData } from "../../firebase/utils";
 
-export const addComment = async (comment, userId, userDisplayName, userProfilePicture) => {
-    const commentWithUser = {
-        ...comment,
-        userId,
-        userDisplayName,
-        userProfilePicture
-    };
-    const commentPath = 'comments/' + comment.eventId;
-    const commentRef = await pushData(commentPath, commentWithUser);
-    return { ...commentWithUser, id: commentRef.key };
+export const addComment = async (text, eventId, userId) => {
+  const comment = {
+    text,
+    user_id: userId,
+    created_at: new Date().toISOString(),
+  };
+
+  const commentRef = await pushData(`comments/${eventId}`, comment);
+  return { ...comment, id: commentRef.key };
 };

@@ -59,7 +59,7 @@ const Comments = ({ eventId, userId, userDisplayName, userProfilePicture }) => {
       <h3>Comments</h3>
       {comments.length > 0 ? (
         comments
-          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
           .map((comment, index) => (
             <div
               key={index}

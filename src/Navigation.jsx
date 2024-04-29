@@ -5,9 +5,9 @@ import { app, getData, setData } from "./firebase/utils";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Homepage from "./screens/Homepage";
 import Login from "./screens/Login/Login";
-import CreateEvent from "./screens/CreateEvent/CreateEvent";
 import BottomNavbar from "./components/BottomNavbar/BottomNavbar";
 import PrivateRoute from "./components/PrivateRoute";
+import CreateEvent from "./screens/CreateEvent/CreateEvent";
 
 const Navigation = () => {
   const { user, setUser } = useContext(UserContext);

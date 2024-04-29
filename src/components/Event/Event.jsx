@@ -52,7 +52,7 @@ const Event = (props) => {
         <div className="col-md-4">
           <img
             src={
-              props.thumbnail_url !== ""
+              props.thumbnail_url !== "" && props.thumbnail_url !== null
                 ? props.thumbnail_url
                 : "https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg"
             }

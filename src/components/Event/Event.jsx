@@ -51,7 +51,11 @@ const Event = (props) => {
       <div className="row g-0">
         <div className="col-md-4">
           <img
-            src={props.thumbnail_url}
+            src={
+              props.thumbnail_url !== ""
+                ? props.thumbnail_url
+                : "https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8189.jpg"
+            }
             alt={props.title}
             className="img-fluid rounded-start"
           />

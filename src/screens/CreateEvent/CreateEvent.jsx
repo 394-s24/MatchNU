@@ -72,6 +72,7 @@ const CreateEvent = () => {
       id="create-event-container"
       overflow="auto"
       style={{ marginBottom: 40 }}
+      data-testid="create-event-screen"
     >
       <h1>Create an event</h1>
       <Form
@@ -178,6 +179,7 @@ const CreateEvent = () => {
               </Dropdown.ItemText>
               {filteredTags.map((tag) => (
                 <Dropdown.Item
+                  data-testid="tag-item"
                   key={tag.id}
                   onClick={() => handleTagSelect(tag)}
                   active={selectedTags.some(
@@ -198,6 +200,7 @@ const CreateEvent = () => {
               value={newTag}
               onChange={(e) => setNewTag(e.target.value)}
               style={{ width: "85%", display: "inline-block" }}
+              data-testid="add-new-tag"
             />
             <Form.Check
               type="switch"
@@ -212,13 +215,14 @@ const CreateEvent = () => {
               variant="primary"
               style={{ marginLeft: "10px" }}
               onClick={handleAddNewTag}
+              data-testid="add-tag-button"
             >
               +
             </Button>
           </Form.Group>
           {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
           {selectedTags.length > 0 && (
-            <ListGroup>
+            <ListGroup data-testid="selected-tags">
               Selected Tags:
               {selectedTags.map((tag) => (
                 <ListGroup.Item key={tag.id}>{tag.name}</ListGroup.Item>

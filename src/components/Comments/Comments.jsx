@@ -55,13 +55,14 @@ const Comments = ({ eventId, userId, userDisplayName, userProfilePicture }) => {
   if (!comments) return null;
 
   return (
-    <div>
+    <div data-testid="comments">
       <h3>Comments</h3>
       {comments.length > 0 ? (
         comments
           .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
           .map((comment, index) => (
             <div
+              data-testid="comment"
               key={index}
               style={{
                 border: "1px solid #ddd",
@@ -87,6 +88,7 @@ const Comments = ({ eventId, userId, userDisplayName, userProfilePicture }) => {
       <button
         className="btn btn-primary mb-3"
         onClick={() => setShowPopup(true)}
+        data-testid="send-comment-button"
       >
         Send Comment
       </button>
@@ -102,6 +104,7 @@ const Comments = ({ eventId, userId, userDisplayName, userProfilePicture }) => {
             padding: "20px",
             zIndex: 100,
           }}
+          data-testid="comment-popup"
         >
           <form onSubmit={handleCommentSubmit}>
             <textarea
@@ -120,6 +123,7 @@ const Comments = ({ eventId, userId, userDisplayName, userProfilePicture }) => {
             <button
               className="btn btn-secondary mb-3"
               onClick={() => setShowPopup(false)}
+              data-testid="cancel-comment-popup"
             >
               Cancel
             </button>

@@ -47,7 +47,7 @@ const Event = (props) => {
   };
 
   return (
-    <div className="card m-4">
+    <div className="card m-4" data-testid="event-card">
       <div className="row g-0">
         <div className="col-md-4">
           <img
@@ -83,7 +83,11 @@ const Event = (props) => {
                 gap: "10px",
               }}
             >
-              <button className="btn btn-primary mb-3" onClick={togglePopup}>
+              <button
+                className="btn btn-primary mb-3"
+                onClick={togglePopup}
+                data-testid="learn-more-button"
+              >
                 {" "}
                 Learn More{" "}
               </button>
@@ -101,6 +105,7 @@ const Event = (props) => {
               <button
                 className="btn btn-primary mb-3 bi bi-chat-left-text-fill"
                 onClick={toggleComments}
+                data-testid="comment-button"
               ></button>
             </div>
             <div>

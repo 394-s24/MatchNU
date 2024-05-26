@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { getData } from "../../firebase/utils";
 import getTagsByIds from "../Event/getTagsByIds";
 import getUserById from "../Event/getUserById";
 import ProfilePicture from "../ProfilePicture";

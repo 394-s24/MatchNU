@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase, get, set, push, ref } from "firebase/database";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC06R40JMEz9Wn2e-kw-5ipZIKQQwThGVY",
@@ -27,4 +28,8 @@ const pushData = async(pathname, data) => {
     return await push(ref(db, pathname), data)
 }
 
-export { app, db, getData, setData, pushData };
+const login = async() => {
+    signInWithPopup(getAuth(app), new GoogleAuthProvider());
+}
+
+export { app, db, getData, setData, pushData, login };

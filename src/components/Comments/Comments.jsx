@@ -6,11 +6,13 @@ import ProfilePicture from "../ProfilePicture";
 import useDbData from "../../hooks/useDbData";
 import getUserById from "../Event/getUserById";
 
-const Comments = ({ eventId, userId, userDisplayName, userProfilePicture }) => {
+const Comments = ({ eventId }) => {
   const [comments, setComments] = useState([]);
   const [commentsVal, setCommentsVal] = useDbData(`comments/${eventId}`);
   const [newComment, setNewComment] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+
+  console.log("HERE", commentsVal);
 
   const { user } = useContext(UserContext);
 

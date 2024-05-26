@@ -12,8 +12,6 @@ const Comments = ({ eventId }) => {
   const [newComment, setNewComment] = useState("");
   const [showPopup, setShowPopup] = useState(false);
 
-  console.log("HERE", commentsVal);
-
   const { user } = useContext(UserContext);
 
   useEffect(() => {

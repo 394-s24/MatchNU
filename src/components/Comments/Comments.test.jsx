@@ -17,16 +17,14 @@ const mockComments = {
     2: {
         created_at: "2023-03-29T14:32:33.494Z",
         text: "This is another comment",
-        user_id: 2
+        user_id: 1
     }
 }
-
-
 
 describe("Comments tests", () => {
   beforeEach(() => {
     useDbData.mockReturnValue([mockComments, vi.fn()]);
-    getUserById.mockReturnValue({id: 1});
+    getUserById.mockReturnValue({id: 1, first_name: "User", last_name: "Name", username: "mockuser", email: "email@email.com"});
   });
 
   test("renders mock data for comments", async () => {
@@ -37,5 +35,6 @@ describe("Comments tests", () => {
     );
 
     expect(await screen.findAllByTestId("comment")).toHaveLength(2);
+    expect(await screen.findAllByText("mockuser")).toBeDefined();
   });
 });

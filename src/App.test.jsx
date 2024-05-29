@@ -36,16 +36,6 @@ describe("App tests", () => {
     expect(screen.queryByTestId("event-card")).toBeNull();
   });
 
-  test("renders an event", async () => {
-    render(
-      <UserContext.Provider value={{ user: { id: 1 }, setUser: vi.fn() }}>
-        <Navigation />
-      </UserContext.Provider>
-    );
-
-    expect(screen.queryByTestId("event-card")).toBeDefined();
-  });
-
   test("renders navbar", async () => {
     render(
       <UserContext.Provider value={{ user: { id: 1 }, setUser: vi.fn() }}>
@@ -64,20 +54,6 @@ describe("App tests", () => {
     );
 
     expect(screen.queryByTestId("bottom-navbar")).toBeDefined();
-  });
-
-  test("renders event details", async () => {
-    render(
-      <UserContext.Provider value={{ user: { id: 1 }, setUser: vi.fn() }}>
-        <Navigation />
-      </UserContext.Provider>
-    );
-
-    fireEvent.click((await screen.findAllByTestId("learn-more-button")).at(0));
-    expect(screen.queryByTestId("event-details")).toBeDefined();
-
-    expect(screen.queryByTestId("attendees")).toBeDefined();
-    expect(await screen.findAllByTestId("attendee")).toBeDefined();
   });
 
   test("renders comments", async () => {

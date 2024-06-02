@@ -98,6 +98,7 @@ const Event = (props) => {
                   backgroundColor: rsvpStatus ? "red" : "green",
                   color: rsvpStatus ? "white" : "",
                 }}
+                data-testid="rsvp-button"
               >
                 {rsvpStatus ? "Can't go :(" : "RSVP"}{" "}
               </button>

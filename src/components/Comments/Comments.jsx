@@ -43,10 +43,11 @@ const Comments = ({ eventId }) => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
+    console.log("HERE");
+
     if (!newComment.trim()) return;
 
     const comment = await addComment(newComment, eventId, user.id);
-
     // setComments([...comments, comment]);
     setNewComment("");
     setShowPopup(false);
@@ -112,11 +113,13 @@ const Comments = ({ eventId }) => {
               onChange={handleInputChange}
               placeholder="Write a comment..."
               style={{ width: "300px", height: "100px" }}
+              data-testid="comment-input"
             />
             <button
               className="btn btn-primary mb-3"
               style={{ marginRight: "10px" }}
               type="submit"
+              data-testid="submit-comment-button"
             >
               Submit Comment
             </button>

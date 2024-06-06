@@ -1,0 +1,288 @@
+commit 90cba81d75115218928ebe82f2d28425c8b603ff
+Author: Jackie Lin <jackielin2025@u.northwestern.edu>
+Date:   Fri Apr 12 16:29:44 2024 -0500
+
+    create event form, bottom tabs navigate, foundation for createEvent api call
+
+M	src/components/BottomNavbar/BottomNavbar.jsx
+M	src/screens/CreateEvent/CreateEvent.jsx
+A	src/screens/CreateEvent/createEvent.js
+
+commit da97af3a2956b5c6fa93b07f0b7700048f45b780
+Author: eligotts <ergotts2002@yahoo.com>
+Date:   Fri Apr 12 16:17:21 2024 -0500
+
+    improved login and multi tag features
+
+M	src/Navigation.jsx
+M	src/components/BottomNavbar/BottomNavbar.jsx
+M	src/components/Event/Event.jsx
+M	src/components/Tag.jsx
+A	src/screens/CreateEvent/CreateEvent.css
+A	src/screens/CreateEvent/CreateEvent.jsx
+M	src/screens/Homepage.jsx
+M	src/screens/Login/Login.css
+M	src/screens/Login/Login.jsx
+
+commit 1b532697845278e95699d637639c4f5e966a11e3
+Author: eligotts <ergotts2002@yahoo.com>
+Date:   Fri Apr 12 15:28:30 2024 -0500
+
+    fixed RSVP
+
+M	src/Navigation.jsx
+M	src/components/Event/Event.jsx
+M	src/firebase/utils.js
+A	src/hooks/useDbData.js
+A	src/screens/Login/Login.css
+M	src/screens/Login/Login.jsx
+M	src/screens/Login/LoginButton.jsx
+
+commit fbf1ca89431a12ee6b5b6b68f53736a67baec49a
+Author: Yuchen-cyber <wangyuchen0709@126.com>
+Date:   Sun Apr 7 20:31:11 2024 -0700
+
+    create user in the database
+
+M	src/components/Profile/Profile.jsx
+M	src/screens/Login/LoginButton.jsx
+
+commit 2c210f412141a2ac0bd5a3fb5f0ba7ad8daae462
+Author: Jackie Lin <jackielin2025@u.northwestern.edu>
+Date:   Sun Apr 7 20:35:22 2024 -0500
+
+    login
+
+M	package-lock.json
+M	package.json
+M	src/App.jsx
+A	src/Navigation.jsx
+A	src/components/BottomNavbar/BottomNavbar.css
+A	src/components/BottomNavbar/BottomNavbar.jsx
+A	src/components/Profile/Profile.jsx
+A	src/contexts/UserContext.jsx
+M	src/firebase/utils.js
+M	src/screens/Homepage.jsx
+A	src/screens/Login/Login.jsx
+A	src/screens/Login/LoginButton.jsx
+
+commit e6c59035be8630e5f1f640e8aa94a9ec4c4facc2
+Author: dpark4 <davidpark2025@u.northwestern.edu>
+Date:   Thu Apr 4 12:20:10 2024 -0500
+
+    3
+
+M	src/components/CreateEvent/CreateEventPopup.jsx
+
+commit fd65cad34ad72d2939b92eaea04083bab154d846
+Author: dpark4 <davidpark2025@u.northwestern.edu>
+Date:   Thu Apr 4 12:17:27 2024 -0500
+
+    create event popup basic
+
+M	src/screens/Homepage.jsx
+
+commit 3a402c9d105e9ca406109bb9e05213b2c9672ae6
+Author: dpark4 <davidpark2025@u.northwestern.edu>
+Date:   Thu Apr 4 12:16:09 2024 -0500
+
+    basic functionality done
+
+A	src/components/CreateEvent/CreateEventPopup.jsx
+M	src/screens/Homepage.jsx
+
+commit 5e8e8c7548392481f0b82a7e14980291ba176c1e
+Author: Jason <jasonli2025@u.northwestern.edu>
+Date:   Mon Apr 1 16:46:40 2024 -0500
+
+    1st demo touchup
+    
+    navbar + popup formatting
+
+M	src/components/Popup/Popup.jsx
+M	src/screens/Homepage.jsx
+
+commit 0b92130902b56e54a95aaeb8b410db79e275b9aa
+Author: Jason <jasonli2025@u.northwestern.edu>
+Date:   Mon Apr 1 16:20:13 2024 -0500
+
+    1st Demo Final
+    
+    search fix, location, images
+
+M	src/components/Event/Event.jsx
+M	src/screens/Homepage.jsx
+
+commit 09451380052736b331e3b5424170eb8a3e682c8f
+Author: dpark4 <davidpark2025@u.northwestern.edu>
+Date:   Mon Apr 1 13:45:12 2024 -0500
+
+    updated search
+
+M	src/screens/Homepage.jsx
+
+commit f226d286f528d4269daba80212b454979212c737
+Author: eligotts <ergotts2002@yahoo.com>
+Date:   Sun Mar 31 17:59:50 2024 -0500
+
+    RSVP implemented
+
+M	src/components/Event/Event.jsx
+A	src/components/Event/getRsvpStatus.js
+M	src/components/Event/getUserById.js
+A	src/components/Event/rsvpForEvent.js
+R074	src/components/Popup.jsx	src/components/Popup/Popup.jsx
+A	src/components/Popup/getAttendeesByEventId.js
+
+commit a8eecb75867c63d44a39c78c3777766dbda1cff9
+Author: Jackie Lin <jackielin2025@u.northwestern.edu>
+Date:   Sun Mar 31 15:55:30 2024 -0500
+
+    filter and search, event component updates
+
+M	package-lock.json
+M	package.json
+M	src/components/Event/Event.css
+M	src/components/Event/Event.jsx
+M	src/components/Popup.jsx
+M	src/components/ProfilePicture.jsx
+A	src/components/Tag.jsx
+M	src/screens/Homepage.jsx
+M	src/screens/getEvents.js
+A	src/screens/getTags.js
+
+commit 93a01e15d94e8777e20eb8e5392f6bd7147b55fa
+Author: Yuchen-cyber <wangyuchen0709@126.com>
+Date:   Sun Mar 31 08:49:44 2024 -0700
+
+    add list of tags
+
+M	index.html
+M	src/screens/Homepage.jsx
+
+commit 0d0fd2dde935728bebdc6da5bc5fb793f1068812
+Author: eligotts <ergotts2002@yahoo.com>
+Date:   Sat Mar 30 20:46:09 2024 -0500
+
+    added attendees list to popup
+
+M	src/components/Popup.jsx
+
+commit 325361ff050285e7ddcdb0c3af6cc7b67d213130
+Author: Jason <jasonli2025@u.northwestern.edu>
+Date:   Sat Mar 30 16:31:59 2024 -0500
+
+    group work
+    
+    tags!!!!
+
+M	package-lock.json
+M	package.json
+M	src/App.jsx
+M	src/components/Event/Event.jsx
+A	src/components/Event/getTagsByIds.js
+M	src/components/Popup.jsx
+A	src/components/ProfilePicture.jsx
+M	src/index.jsx
+M	src/screens/Homepage.jsx
+
+commit fb73b6de11d53cd4551b4aed58acc532d26f5822
+Author: eligotts <ergotts2002@yahoo.com>
+Date:   Sat Mar 30 15:34:32 2024 -0500
+
+    group updates
+
+R100	src/components/Event.css	src/components/Event/Event.css
+R064	src/components/Event.jsx	src/components/Event/Event.jsx
+A	src/components/Event/getUserById.js
+M	src/components/Popup.jsx
+M	src/firebase/utils.js
+M	src/screens/Homepage.jsx
+M	src/screens/getEvents.js
+
+commit 5476a01a505c97d9018a074a8affcca3fff9a175
+Author: Jackie Lin <jackielin2025@u.northwestern.edu>
+Date:   Sat Mar 30 14:45:06 2024 -0500
+
+    fix errors
+
+M	src/components/Event.jsx
+
+commit 10e09b2a9dbebc3f4c5e10ee902a2ce4b7ac7e27
+Author: Yuchen-cyber <wangyuchen0709@126.com>
+Date:   Sat Mar 30 12:22:30 2024 -0700
+
+    add bootstrap
+
+M	package-lock.json
+M	package.json
+M	src/App.jsx
+M	src/components/Event.css
+M	src/components/Event.jsx
+
+commit d05f16eed8829bd95050bc2d16d1778aef70d5aa
+Author: Jason <jasonli2025@u.northwestern.edu>
+Date:   Sat Mar 30 13:02:03 2024 -0500
+
+    small ui update
+    
+    centered img pfp placeholder font size changes
+
+M	src/components/Event.css
+M	src/components/Event.jsx
+
+commit 3039cfa30926dc2efc62ee14e7245618623b04c6
+Author: eligotts <ergotts2002@yahoo.com>
+Date:   Sat Mar 30 12:20:53 2024 -0500
+
+    added popup screen
+
+M	src/components/Event.jsx
+A	src/components/Popup.jsx
+
+commit 9af84f9be334317c2605dafbb0b4e5199a44993e
+Author: Jackie Lin <jackielin2025@u.northwestern.edu>
+Date:   Sat Mar 30 11:44:33 2024 -0500
+
+    homepage progress
+
+A	.prettierignore
+M	package-lock.json
+M	package.json
+M	src/App.jsx
+A	src/components/Event.css
+A	src/components/Event.jsx
+A	src/firebase/utils.js
+A	src/screens/Homepage.jsx
+A	src/screens/getEvents.js
+
+commit d39c5b4bbd6ed0cf5d6546433ec3501a3e45f0d3
+Author: Jackie Lin <jackielin2025@u.northwestern.edu>
+Date:   Fri Mar 29 18:28:40 2024 -0500
+
+    firebase hosting
+
+A	.firebaserc
+A	firebase.json
+
+commit e59a01b532cb9e1819cbed17a413661eb8d74179
+Author: Jackie Lin <jackielin2025@u.northwestern.edu>
+Date:   Fri Mar 29 18:06:42 2024 -0500
+
+    initial commit
+
+A	.gitignore
+A	LICENSE
+A	README.md
+A	index.html
+A	package-lock.json
+A	package.json
+A	public/favicon.svg
+A	public/robots.txt
+A	src/App.css
+A	src/App.jsx
+A	src/App.test.jsx
+A	src/index.css
+A	src/index.jsx
+A	src/logo.svg
+A	vite.config.js

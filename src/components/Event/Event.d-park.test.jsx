@@ -1,66 +1,58 @@
-import { describe, expect, test, vi, beforeEach } from "vitest";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { UserContext } from "../../contexts/UserContext";
-import Event from "./Event";
-import Navigation from "../../Navigation";
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { getData, setData } from '../../firebase/utils';
+import rsvpForEvent from './rsvpForEvent';
 
-
-// Mock data fetching functions
-vi.mock('./getUserById', () => ({
-  __esModule: true,
-  default: vi.fn(() => Promise.resolve({ id: 1, username: 'testuser', profile_picture: 'url' }))
-}));
-vi.mock('./getTagsByIds', () => ({
-  __esModule: true,
-  default: vi.fn(() => Promise.resolve([{ tag: 'tag1' }]))
-}));
-vi.mock('./getRsvpStatus', () => ({
-  __esModule: true,
-  default: vi.fn(() => Promise.resolve(false))
+vi.mock('../../firebase/utils', () => ({
+  getData: vi.fn(),
+  setData: vi.fn()
 }));
 
-describe("Event Component Tests", () => {
-  let userMock, eventProps;
-
+describe('rsvpForEvent Functionality', () => {
   beforeEach(() => {
-    render(
-      <UserContext.Provider value={{ user: { id: 1 }, setUser: vi.fn() }}>
-        <Navigation />
-      </UserContext.Provider>
-    );
-    eventProps = {
-      id: "event1",
-      user_id: "user1",
-      tags: [],
-      title: "Test Event",
-      event_time: new Date().toISOString(),
-      location: "Virtual",
-      thumbnail_url: "some_url",
-    };
-
     vi.resetAllMocks();
   });
 
-  test("toggle RSVP updates button text and style", async () => {
-    render(
-      <UserContext.Provider value={{ user: userMock, setUser: userMock.setUser }}>
-        <Event {...eventProps} />
-      </UserContext.Provider>
-    );
-
-    await waitFor(() => {
-      // Ensure all promises resolve
-      const rsvpButton = screen.getByTestId("rsvp-button");
-      expect(rsvpButton.textContent).toBe("RSVP");
+  it('should add a user to the event attendees when RSVP is true', async () => {
+    getData.mockResolvedValue({
+      exists: () => true,
+      val: () => ({ attendees_ids: [] })
     });
 
-    // Simulate clicking the RSVP button
-    fireEvent.click(screen.getByTestId("rsvp-button"));
+    await rsvpForEvent('user123', 'event123', true);
 
-    // Wait for the button text to update
-    await waitFor(() => {
-      expect(screen.getByTestId("rsvp-button").textContent).toBe("Can't go :(");
-      expect(screen.getByTestId("rsvp-button").style.backgroundColor).toBe("red");
+    expect(setData).toHaveBeenCalledWith('events/event123/attendees_ids', ['user123']);
+  });
+
+  it('should remove a user from the event attendees when RSVP is false', async () => {
+    getData.mockResolvedValue({
+      exists: () => true,
+      val: () => ({ attendees_ids: ['user123'] }) 
     });
+
+    await rsvpForEvent('user123', 'event123', false);
+
+    expect(setData).toHaveBeenCalledWith('events/event123/attendees_ids', []);
+  });
+
+  it('should handle cases where the event does not exist', async () => {
+    getData.mockResolvedValue({
+      exists: () => false,
+      val: () => null
+    });
+
+    await rsvpForEvent('user123', 'event123', true);
+
+    expect(setData).not.toHaveBeenCalled();
+  });
+
+  it('should handle cases where the attendees list does not exist', async () => {
+    getData.mockResolvedValue({
+      exists: () => true,
+      val: () => ({})
+    });
+
+    await rsvpForEvent('user123', 'event123', true);
+
+    expect(setData).toHaveBeenCalledWith('events/event123/attendees_ids', ['user123']);
   });
 });

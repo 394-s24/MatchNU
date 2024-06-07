@@ -109,6 +109,7 @@ const CreateEvent = () => {
             type="text"
             placeholder="Enter event title"
             required
+            data-testid="title-input"
           />
         </Form.Group>
         <Form.Group>
@@ -119,6 +120,7 @@ const CreateEvent = () => {
             id="description"
             type="text"
             placeholder="Enter event description"
+            data-testid="description-input"
           />
         </Form.Group>
         <Form.Group>
@@ -130,6 +132,7 @@ const CreateEvent = () => {
             type="date"
             placeholder="Enter event date"
             required
+            data-testid="date-input"
           />
         </Form.Group>
         <Form.Group>
@@ -141,6 +144,7 @@ const CreateEvent = () => {
             type="time"
             placeholder="Enter event time"
             required
+            data-testid="time-input"
           />
         </Form.Group>
         <Form.Group>
@@ -152,6 +156,7 @@ const CreateEvent = () => {
             type="text"
             placeholder="Enter event location"
             required
+            data-testid="event-input"
           />
         </Form.Group>
         <Form.Group>
@@ -241,7 +246,7 @@ const CreateEvent = () => {
             placeholder="Enter thumbnail URL"
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" data-testid="submit-button">
           Submit
         </Button>
       </Form>

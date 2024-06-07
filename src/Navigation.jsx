@@ -8,6 +8,7 @@ import Login from "./screens/Login/Login";
 import BottomNavbar from "./components/BottomNavbar/BottomNavbar";
 import PrivateRoute from "./components/PrivateRoute";
 import CreateEvent from "./screens/CreateEvent/CreateEvent";
+import AppRoutes from "./AppRoutes";
 
 const Navigation = () => {
   const { user, setUser } = useContext(UserContext);
@@ -45,25 +46,7 @@ const Navigation = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Homepage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/create-event"
-          element={
-            <PrivateRoute>
-              <CreateEvent />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <AppRoutes />
       <BottomNavbar />
     </BrowserRouter>
   );
